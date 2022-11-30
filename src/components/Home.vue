@@ -1,10 +1,21 @@
 <template>
-  <div>Hola Mundo</div>
+  <Layout>
+    <template #header>
+      <Header />
+    </template>
+  </Layout>
 </template>
 
 <script>
+import Layout from './Layout.vue';
+import Header from './Header.vue';
+
 export default {
   name: "Home",
+  components: {
+    Layout,
+    Header
+  }
 };
 </script>
 
