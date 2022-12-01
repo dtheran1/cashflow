@@ -40,7 +40,7 @@
       });
 
       const amountCurrency = computed(() => {
-        return new Intl.NumberFormat(('es-CO'), {
+        return new Intl.NumberFormat('es-CO', {
           style: 'currency',
           currency: 'COP',
         }).format(amountVisual.value);
