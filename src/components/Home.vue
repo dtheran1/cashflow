@@ -11,7 +11,7 @@
         :total-amount="10000000"
       >
         <template #graphic>
-          graphic
+          <Graphic />
         </template>
 
         <template #action>
@@ -35,6 +35,7 @@
   import Resume from './Resume/Index.vue';
   import Movements from './Movements/Index.vue';
   import Action from './Action.vue'
+  import Graphic from '../components/Resume/Graphic.vue'
 
   export default {
     name: 'Home',
@@ -43,7 +44,8 @@
       Header,
       Resume,
       Movements,
-      Action
+      Action,
+      Graphic
     },
     setup() {
       const amount = ref(100000);
