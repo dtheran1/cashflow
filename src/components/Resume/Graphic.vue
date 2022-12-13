@@ -4,7 +4,8 @@
       @touchstart="tap"
       @touchmove="tap"
       @touchend="untap"
-      viewBox="0 0 300 200">
+      viewBox="0 0 300 200"
+    >
       <line
         stroke="#c4c4c4"
         stroke-width="2"
@@ -34,7 +35,7 @@
 </template>
 
 <script setup>
-  import { defineProps, toRefs, computed, ref } from 'vue';
+  import { defineProps, toRefs, defineEmits, computed, ref } from 'vue';
   const props = defineProps({
     amounts: {
       type: Array,
@@ -68,20 +69,23 @@
 
   const showPointer = ref(false);
 
-  const pointer = ref(0)
+  const pointer = ref(0);
 
-  const tap = ({target, touches}) => {
+  const emit = defineEmits(['select'])
+
+  const tap = ({ target, touches }) => {
     showPointer.value = true;
     const elWidth = target.getBoundingClientRect().width; // Esta funcion nativa de JS nos permite calcular el width de un elemento cuando se presenta en diferentes anchos de pantalla
     const elX = target.getBoundingClientRect().x; // Obtenemos el punto inicial del lienzo en el eje x
     const touchX = touches[0].clientX; // Obtenemos el valor del touch del cliente en el eje x
 
     pointer.value = ((touchX - elX) * 300) / elWidth;
+    // TODO Propagar el monto al component padre
+    emit('select', )
   };
 
-  const untap = ({target, touches}) => {
+  const untap = ({ target, touches }) => {
     showPointer.value = false;
-
   };
 </script>
 
