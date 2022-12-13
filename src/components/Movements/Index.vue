@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-  import { defineProps, toRefs } from 'vue';
+  import { defineProps, defineEmits, toRefs } from 'vue';
   import Movement from './Movement.vue';
 
   const props = defineProps({
@@ -26,8 +26,10 @@
     },
   });
 
+  const emit = defineEmits(['remove'])
+
   const remove = (id) => {
-    console.log(id);
+    emit( 'remove',id);
   };
 
   const { movements } = toRefs(props);

@@ -15,12 +15,12 @@
         </template>
 
         <template #action>
-          <Action />
+          <Action @create="create" />
         </template>
       </Resume>
     </template>
     <template #movements>
-      <Movements :movements="movements" />
+      <Movements :movements="movements" @remove="remove" />
     </template>
   </Layout>
 </template>
@@ -46,7 +46,7 @@
       Graphic,
     },
     setup() {
-      const amount = ref(100000);
+      const amount = ref(0);
       const label = ref('Ahorro total');
       const movements = ref([
         {
@@ -144,7 +144,17 @@
         });
       });
 
-      return { amount, label, movements, amounts };
+      const create = (movement) => {
+        amount.value = movement.amount
+        movements.value.push(movement);
+      };
+
+      const remove = (id) => {
+        const index = movements.value.findIndex((m) => m.id === id);
+        movements.value.splice(index, 1);
+      };
+
+      return { amount, label, movements, amounts, create, remove };
     },
   };
 </script>

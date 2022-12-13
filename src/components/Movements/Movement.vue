@@ -7,7 +7,7 @@
     <div class="action">
       <img @click="remove" src="../../assets/trash-icon.svg" alt="trash" />
       <p :class="{ red: isNegative, green: !isNegative }">
-        {{ currencyAmount }}
+        {{ amountCurrency }}
       </p>
     </div>
   </div>
@@ -34,12 +34,12 @@
 
   const emit = defineEmits(['remove']);
 
-  const currencyAmount = computed(() => {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-    }).format(amount.value);
-  });
+  const currencyFormatter = new Intl.NumberFormat("es-CO", {
+  style: "currency",
+  currency: "COP",
+});
+
+  const amountCurrency = computed(() => currencyFormatter.format(amount.value));
 
   const isNegative = computed(() => amount.value < 0);
 

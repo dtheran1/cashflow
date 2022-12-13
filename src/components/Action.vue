@@ -6,11 +6,11 @@
       <form @submit.prevent="submit">
         <div class="field">
           <label>Tītulo</label>
-          <input type="text" v-model="title">
+          <input type="text" v-model="title" />
         </div>
         <div class="field">
           <label>Monto</label>
-          <input type="text" v-model="amount">
+          <input type="text" v-model.number="amount" />
         </div>
         <div class="field">
           <label>Descripciōn</label>
@@ -19,16 +19,16 @@
         <div class="field">
           <label>Tipo de movimiento</label>
           <label class="radio-label">
-            <input type="radio" v-model="movementType" value="Ingreso">
+            <input type="radio" v-model="movementType" value="Ingreso" />
             <span>Ingreso</span>
           </label>
           <label class="radio-label">
-            <input type="radio" v-model="movementType" value="Gasto">
+            <input type="radio" v-model="movementType" value="Gasto" />
             <span>Gasto</span>
           </label>
         </div>
         <div class="action">
-          <button> Agregar movimiento </button>
+          <button>Agregar movimiento</button>
         </div>
       </form>
     </Modal>
@@ -36,18 +36,27 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+  import { ref, defineEmits } from 'vue';
   import Modal from './Modal.vue';
 
   const showModal = ref(false);
-  const tilte = ref('');
+  const title = ref('');
   const amount = ref(0);
   const description = ref('');
   const movementType = ref('Ingreso');
 
+  const emit = defineEmits(['create']);
+
   const submit = () => {
-    showModal.value = !showModal.value
-  }
+    showModal.value = !showModal.value;
+    emit('create', {
+      title: title.value,
+      description: description.value,
+      amout: movementType.value === 'Ingreso' ? amount.value : -amount.value,
+      time: new Date(),
+      id: new Date().getTime(),
+    });
+  };
 </script>
 
 <style scoped>
