@@ -10,7 +10,7 @@
         </div>
         <div class="field">
           <label>Monto</label>
-          <input type="text" v-model.number="amount" />
+          <input type="number" v-model.number="amount" />
         </div>
         <div class="field">
           <label>Descripciōn</label>

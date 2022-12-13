@@ -126,11 +126,6 @@
           .filter((m) => {
             const today = new Date();
             const oldDate = today.setDate(today.getDate() - 30);
-
-            // const dayDiff = (today.getTime() - m.time.getTime())/(1000 * 60 *24)
-
-            // console.log(dayDiff <= 30);
-            // return dayDiff <= 30
             return m.time > oldDate;
           })
           .map((m) => m.amount);
