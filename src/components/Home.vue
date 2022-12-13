@@ -140,7 +140,6 @@
       });
 
       const create = (movement) => {
-        amount.value = movement.amount
         movements.value.push(movement);
       };
 
